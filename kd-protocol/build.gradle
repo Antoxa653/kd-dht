@@ -1,0 +1,9 @@
+jar {
+  manifest {
+    attributes 'Implementation-Title': 'Kademlia Protocol', 'Implementation-Version': version
+  }
+}
+
+dependencies {
+  compile 'com.google.protobuf:protobuf-java:2.4.1'
+}
