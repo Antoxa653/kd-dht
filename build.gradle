@@ -3,6 +3,7 @@ subprojects {
   apply plugin: 'eclipse'
 
   sourceCompatibility = 1.7
+  group = 'com.github.kd'
   version = '1.0.0-SNAPSHOT'
 
   repositories {

@@ -1,6 +1,7 @@
 target
 bin
 *.settings
+*.setting
 *~
 .checkstyle
 *.log
@@ -10,3 +11,4 @@ bin
 *.jar
 .gradle
 build
+.classpath
