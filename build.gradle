@@ -1,7 +1,7 @@
 subprojects {
   apply plugin: 'java'
   apply plugin: 'eclipse'
-
+  
   sourceCompatibility = 1.7
   group = 'com.github.kd'
   version = '1.0.0-SNAPSHOT'
@@ -11,6 +11,12 @@ subprojects {
   }
 
   dependencies {
-      testCompile group: 'junit', name: 'junit', version: '4.+'
+      testCompile "junit:junit:4.11"
+  }
+}
+
+project(':kd-core') {
+  dependencies {
+    compile project(':kd-protocol')
   }
 }

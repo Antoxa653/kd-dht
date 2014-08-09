@@ -3,7 +3,3 @@ jar {
     attributes 'Implementation-Title': 'Kademlia Core', 'Implementation-Version': version
   }
 }
-
-dependencies {
-  compile project(':kd-protocol')
-}
