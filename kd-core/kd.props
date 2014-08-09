@@ -1,7 +1,0 @@
-alpha=3
-B=160
-k=20
-tExpire=86400
-tRefresh=3600
-tReplicate=3600
-tRepublish=86400

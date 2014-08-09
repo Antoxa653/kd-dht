@@ -1,90 +1,46 @@
 package com.github.kd;
 
-import java.io.BufferedReader;
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NetworkConfigurationLoader {
 	private Logger logger = LoggerFactory.getLogger(getClass());
-	private int alpha = 3;
-	private int B = 160;
-	private int k = 20;
-	private int tExpire = 86400;
-	private int tRefresh = 3600;
-	private int tReplicate = 3600;
-	private int tRepublish = 86400;
 
-	public NetworkConfiguration load() {
-		File props = new File("kd.props");
-		if (props.exists()) {
-			return readPropsFile();
-		} else {
-			return setDefaultNetConfiguration();
-		}
-	}
+	private NetworkConfiguration load() {
+		Properties prop = new Properties();
+		String fileName = "src/main/resources/kd.props";
+		try {
+			InputStream is = new FileInputStream(fileName);
+			prop.load(is);
 
-	private NetworkConfiguration readPropsFile() {
-		try (FileReader reader = new FileReader("kd.props"); BufferedReader br = new BufferedReader(reader)) {
-			String line;
-			while ((line = br.readLine()) != null) {
-				String propertieName = line.substring(0, line.indexOf("=")).trim();
-				int propertieValue = Integer.parseInt(line.substring(line.indexOf("=") + 1, line.length()).trim());
-				switch (propertieName) {
-				case "alpha":
-					alpha = propertieValue;
-					break;
-				case "B":
-					B = propertieValue;
-					break;
-				case "k":
-					k = propertieValue;
-					break;
-				case "tExpire":
-					tExpire = propertieValue;
-					break;
-				case "tRefresh":
-					tRefresh = propertieValue;
-					break;
-				case "tReplicate":
-					tReplicate = propertieValue;
-					break;
-				case "tRepublish":
-					tRepublish = propertieValue;
-					break;
-				default:
-					break;
-				}
-			}
-
-		} catch (FileNotFoundException e) {
-			logger.error("kd.props file not found");
+		} catch (FileNotFoundException e1) {
+			logger.error("file src/main/resources/kd.props was not found, default network configuration parameters set!");
 		} catch (IOException e) {
-			logger.error("IOException occurs while reading kd.props file");
+			logger.error("IOException occurs while reading src/main/resources/kd.props file, default network configuration parameters set!");
 		}
-		return new NetworkConfiguration(alpha, B, k, tExpire, tRefresh, tReplicate, tRepublish);
+		return new NetworkConfiguration(prop.getProperty("alpha", "3"), prop.getProperty("B", "160"), prop.getProperty(
+				"k", "20"), prop.getProperty("tExpire", "86400"), prop.getProperty("tRefresh", "3600"),
+				prop.getProperty("tReplicate", "3600"), prop.getProperty("tRepublish", "86400"));
 	}
-
-	private NetworkConfiguration setDefaultNetConfiguration() {
-		return new NetworkConfiguration(alpha, B, k, tExpire, tRefresh, tReplicate, tRepublish);
-	}
-
 }
 
 class NetworkConfiguration {
-	private int alpha;
-	private int B;
-	private int k;
-	private int tExpire;
-	private int tRefresh;
-	private int tReplicate;
-	private int tRepublish;
+	private String alpha;
+	private String B;
+	private String k;
+	private String tExpire;
+	private String tRefresh;
+	private String tReplicate;
+	private String tRepublish;
 
-	NetworkConfiguration(int alpha, int B, int k, int tExpire, int tRefresh, int tReplicate, int tRepublish) {
+	NetworkConfiguration(String alpha, String B, String k, String tExpire, String tRefresh, String tReplicate,
+			String tRepublish) {
 		this.alpha = alpha;
 		this.B = B;
 		this.k = k;
@@ -94,31 +50,31 @@ class NetworkConfiguration {
 		this.tRepublish = tRepublish;
 	}
 
-	public int getAlpha() {
+	public String getAlpha() {
 		return alpha;
 	}
 
-	public int getB() {
+	public String getB() {
 		return B;
 	}
 
-	public int getK() {
+	public String getK() {
 		return k;
 	}
 
-	public int gettExpire() {
+	public String gettExpire() {
 		return tExpire;
 	}
 
-	public int gettRefresh() {
+	public String gettRefresh() {
 		return tRefresh;
 	}
 
-	public int gettReplicate() {
+	public String gettReplicate() {
 		return tReplicate;
 	}
 
-	public int gettRepublish() {
+	public String gettRepublish() {
 		return tRepublish;
 	}
 
