@@ -11,8 +11,15 @@ import org.slf4j.LoggerFactory;
 
 public class NetworkConfigurationLoader {
 	private Logger logger = LoggerFactory.getLogger(getClass());
+	private final String alpha = "3";
+	private final String b = "160";
+	private final String k = "20";
+	private final String tExpire = "86400";
+	private final String tRefresh = "3600";
+	private final String tReplicate = "3600";
+	private final String tRepublish = "86400";
 
-	private NetworkConfiguration load() {
+	public NetworkConfiguration load() {
 		Properties prop = new Properties();
 		String fileName = "src/main/resources/kd.props";
 		try {
@@ -24,9 +31,9 @@ public class NetworkConfigurationLoader {
 		} catch (IOException e) {
 			logger.error("IOException occurs while reading src/main/resources/kd.props file, default network configuration parameters set!");
 		}
-		return new NetworkConfiguration(prop.getProperty("alpha", "3"), prop.getProperty("B", "160"), prop.getProperty(
-				"k", "20"), prop.getProperty("tExpire", "86400"), prop.getProperty("tRefresh", "3600"),
-				prop.getProperty("tReplicate", "3600"), prop.getProperty("tRepublish", "86400"));
+		return new NetworkConfiguration(prop.getProperty("alpha", alpha), prop.getProperty("B", b), prop.getProperty(
+				"k", k), prop.getProperty("tExpire", tExpire), prop.getProperty("tRefresh", tRefresh),
+				prop.getProperty("tReplicate", tReplicate), prop.getProperty("tRepublish", tRepublish));
 	}
 }
 
