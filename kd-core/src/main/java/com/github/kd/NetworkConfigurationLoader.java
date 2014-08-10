@@ -1,9 +1,12 @@
 package com.github.kd;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Properties;
 
 import org.slf4j.Logger;
@@ -11,78 +14,41 @@ import org.slf4j.LoggerFactory;
 
 public class NetworkConfigurationLoader {
 	private Logger logger = LoggerFactory.getLogger(getClass());
-	private final String alpha = "3";
-	private final String b = "160";
-	private final String k = "20";
-	private final String tExpire = "86400";
-	private final String tRefresh = "3600";
-	private final String tReplicate = "3600";
-	private final String tRepublish = "86400";
 
-	public NetworkConfiguration load() {
+	public HashMap<String, String> load() {
 		Properties prop = new Properties();
+		HashMap<String, String> propertiesList = new HashMap<String, String>();
 		String fileName = "src/main/resources/kd.props";
-		try {
-			InputStream is = new FileInputStream(fileName);
-			prop.load(is);
-
-		} catch (FileNotFoundException e1) {
-			logger.error("file src/main/resources/kd.props was not found, default network configuration parameters set!");
-		} catch (IOException e) {
-			logger.error("IOException occurs while reading src/main/resources/kd.props file, default network configuration parameters set!");
+		File file = new File(fileName);
+		if (file.exists()) {
+			try {
+				InputStream is = new FileInputStream(fileName);
+				prop.load(is);
+				Enumeration<?> e = prop.propertyNames();
+				while (e.hasMoreElements()) {
+					String key = (String) e.nextElement();
+					String value = prop.getProperty(key);
+					propertiesList.put(key.toUpperCase(), value);
+				}
+			} catch (FileNotFoundException e1) {
+				logger.error("file src/main/resources/kd.props was not found, default network configuration parameters set!");
+			} catch (IOException e) {
+				logger.error("IOException occurs while reading src/main/resources/kd.props file, default network configuration parameters set!");
+			}
+			return propertiesList;
 		}
-		return new NetworkConfiguration(prop.getProperty("alpha", alpha), prop.getProperty("B", b), prop.getProperty(
-				"k", k), prop.getProperty("tExpire", tExpire), prop.getProperty("tRefresh", tRefresh),
-				prop.getProperty("tReplicate", tReplicate), prop.getProperty("tRepublish", tRepublish));
-	}
-}
+		else {
+			for (NetworkProperties props : NetworkProperties.values()) {
+				propertiesList.put(props.toString(), props.getDefaultValue());
+			}
 
-class NetworkConfiguration {
-	private String alpha;
-	private String B;
-	private String k;
-	private String tExpire;
-	private String tRefresh;
-	private String tReplicate;
-	private String tRepublish;
+			return propertiesList;
+		}
 
-	NetworkConfiguration(String alpha, String B, String k, String tExpire, String tRefresh, String tReplicate,
-			String tRepublish) {
-		this.alpha = alpha;
-		this.B = B;
-		this.k = k;
-		this.tExpire = tExpire;
-		this.tRefresh = tRefresh;
-		this.tReplicate = tReplicate;
-		this.tRepublish = tRepublish;
 	}
 
-	public String getAlpha() {
-		return alpha;
+	public static void main(String[] args) {
+		NetworkConfigurationLoader n = new NetworkConfigurationLoader();
+		System.out.println(n.load().toString());
 	}
-
-	public String getB() {
-		return B;
-	}
-
-	public String getK() {
-		return k;
-	}
-
-	public String gettExpire() {
-		return tExpire;
-	}
-
-	public String gettRefresh() {
-		return tRefresh;
-	}
-
-	public String gettReplicate() {
-		return tReplicate;
-	}
-
-	public String gettRepublish() {
-		return tRepublish;
-	}
-
 }
