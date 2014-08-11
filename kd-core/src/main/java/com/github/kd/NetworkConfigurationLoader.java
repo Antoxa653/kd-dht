@@ -34,12 +34,5 @@ public class NetworkConfigurationLoader {
 			}
 			return properties;
 		}
-
 	}
-
-	public static void main(String[] args) {
-		NetworkConfigurationLoader n = new NetworkConfigurationLoader();
-		System.out.println(n.load().toString());
-	}
-
 }
