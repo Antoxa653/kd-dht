@@ -5,8 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Properties;
 
 import org.slf4j.Logger;
@@ -15,34 +13,26 @@ import org.slf4j.LoggerFactory;
 public class NetworkConfigurationLoader {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
-	public HashMap<String, String> load() {
-		Properties prop = new Properties();
-		HashMap<String, String> propertiesList = new HashMap<String, String>();
+	public Properties load() {
+		Properties properties = new Properties();
 		String fileName = "src/main/resources/kd.props";
 		File file = new File(fileName);
 		if (file.exists()) {
 			try {
 				InputStream is = new FileInputStream(fileName);
-				prop.load(is);
-				Enumeration<?> e = prop.propertyNames();
-				while (e.hasMoreElements()) {
-					String key = (String) e.nextElement();
-					String value = prop.getProperty(key);
-					propertiesList.put(key.toUpperCase(), value);
-				}
+				properties.load(is);
 			} catch (FileNotFoundException e1) {
-				logger.error("file src/main/resources/kd.props was not found, default network configuration parameters set!");
+				logger.error("file src/main/resources/kd.props was not found");
 			} catch (IOException e) {
-				logger.error("IOException occurs while reading src/main/resources/kd.props file, default network configuration parameters set!");
+				logger.error("IOException occurs while reading src/main/resources/kd.props file");
 			}
-			return propertiesList;
+			return properties;
 		}
 		else {
 			for (NetworkProperties props : NetworkProperties.values()) {
-				propertiesList.put(props.toString(), props.getDefaultValue());
+				properties.put(props.getKey(), props.getValue());
 			}
-
-			return propertiesList;
+			return properties;
 		}
 
 	}
@@ -51,4 +41,5 @@ public class NetworkConfigurationLoader {
 		NetworkConfigurationLoader n = new NetworkConfigurationLoader();
 		System.out.println(n.load().toString());
 	}
+
 }
