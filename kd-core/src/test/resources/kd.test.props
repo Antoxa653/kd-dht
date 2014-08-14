@@ -1,0 +1,7 @@
+kd.network.degree=7
+kd.key.size=120
+kd.bucket.size=25
+kd.expire.time=86411
+kd.refresh.time=3610
+kd.replicate.time=3620
+kd.republish.time=86401
