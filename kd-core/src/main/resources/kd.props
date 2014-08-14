@@ -1,0 +1,7 @@
+ParallelismDegree=3
+KeySize=160
+ContactsInTheBucket=20
+tExpire=86400
+tRefresh=3600
+tReplicate=3600
+tRepublish=86400
