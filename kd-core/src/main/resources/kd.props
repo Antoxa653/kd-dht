@@ -1,7 +1,7 @@
-alpha=3
-B=160
-k=20
-tExpire=86400
-tRefresh=3600
-tReplicate=3600
-tRepublish=86400
+kd.network.degree=3
+kd.key.size=160
+kd.bucket.size=20
+kd.expire.time=86410
+kd.refresh.time=3600
+kd.replicate.time=3600
+kd.republish.time=86400
