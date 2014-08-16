@@ -13,5 +13,5 @@ dependencies {
 }
 
 task compileProto  << {
-	ant.java (classname: "com.dyuproject.protostuff.compiler.CompilerMain", classpath:configurations.proto.asPath, dir: "$project.projectDir") { arg(line: "F:/git/kd-dht/kd-protocol/protostuff.properties") }
+	ant.java (classname: "com.dyuproject.protostuff.compiler.CompilerMain", classpath:configurations.proto.asPath) { arg(line: "protostuff.properties") }
 }
