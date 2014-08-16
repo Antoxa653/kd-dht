@@ -1,9 +1,17 @@
 jar {
-  manifest {
-    attributes 'Implementation-Title': 'Kademlia Protocol', 'Implementation-Version': version
-  }
+	manifest {
+		attributes 'Implementation-Title': 'Kademlia Protocol', 'Implementation-Version': version
+	}
 }
+configurations { proto }
 
 dependencies {
-  compile 'com.google.protobuf:protobuf-java:2.4.1'
+	compile 'com.google.protobuf:protobuf-java:2.4.1'
+	compile 'com.dyuproject.protostuff:protostuff-compiler:1.0.8'
+	compile 'com.dyuproject.protostuff:protostuff-core:1.0.8'
+	proto "com.dyuproject.protostuff:protostuff-compiler:1.0.8"
+}
+
+task compileProto  << {
+	ant.java (classname: "com.dyuproject.protostuff.compiler.CompilerMain", classpath:configurations.proto.asPath, dir: "$project.projectDir") { arg(line: "F:/git/kd-dht/kd-protocol/protostuff.properties") }
 }
