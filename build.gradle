@@ -28,3 +28,4 @@ project(':kd-core') {
     compile project(':kd-protocol')
   }
 }
+
