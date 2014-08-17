@@ -1,4 +1,4 @@
-package com.github.kd;
+package com.github.kd.common;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,13 +9,13 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class KdConfiguration {
+public final class KdProperties {
 
-	private static Logger logger = LoggerFactory.getLogger(KdConfiguration.class);
+	private static Logger logger = LoggerFactory.getLogger(KdProperties.class);
 
 	private Properties store;
 
-	private KdConfiguration(Properties properties) {
+	private KdProperties(Properties properties) {
 		if (properties.isEmpty()) {
 			store = loadDefault();
 		} else {
@@ -23,18 +23,18 @@ public final class KdConfiguration {
 		}
 	}
 
-	public static KdConfiguration load(File configFile) {
+	public static KdProperties load(File propertiesFile) {
 		Properties properties = new Properties();
 
-		if (configFile != null && configFile.exists() && configFile.isFile()) {
-			try (InputStream configFileStream = new FileInputStream(configFile)) {
-				properties.load(configFileStream);
+		if (propertiesFile != null && propertiesFile.exists() && propertiesFile.isFile()) {
+			try (InputStream propertiesFileStream = new FileInputStream(propertiesFile)) {
+				properties.load(propertiesFileStream);
 			} catch (IOException e) {
-				logger.error("Couldn't load a config file {}. The default configuration will be used instead.",
-						configFile.getAbsolutePath(), e);
+				logger.error("Couldn't load a properties file {}. The default properties will be used instead.",
+						propertiesFile.getAbsolutePath(), e);
 			}
 		}
-		return new KdConfiguration(properties);
+		return new KdProperties(properties);
 	}
 
 	public int getValue(String propertyKey) {
@@ -51,8 +51,8 @@ public final class KdConfiguration {
 
 	private Properties loadDefault() {
 		Properties properties = new Properties();
-		properties.put(KdConstants.NETWORK_PARALLELISM_DEGREE_PROPERTY, "3");
-		properties.put(KdConstants.KEY_SIZE_PROPERTY, "160");
+		properties.put(KdConstants.NETWORK_DEGREE_PROPERTY, "3");
+		properties.put(KdConstants.KEY_SIZE_PROPERTY, "20"); // 160 bits = 20 bytes
 		properties.put(KdConstants.BUCKET_SIZE_PROPERTY, "20");
 		properties.put(KdConstants.EXPIRATION_TIME_PROPERTY, "86410");
 		properties.put(KdConstants.REFRESH_TIME_PROPERTY, "3600");

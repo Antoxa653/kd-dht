@@ -1,1 +1,1 @@
-include "kd-protocol", "kd-core"
+include "kd-common", "kd-protocol", "kd-core"

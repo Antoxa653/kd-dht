@@ -1,8 +1,8 @@
-package com.github.kd;
+package com.github.kd.common;
 
 public final class KdConstants {
 
-	public static final String NETWORK_PARALLELISM_DEGREE_PROPERTY = "kd.network.degree";
+	public static final String NETWORK_DEGREE_PROPERTY = "kd.network.degree";
 
 	public static final String KEY_SIZE_PROPERTY = "kd.key.size";
 

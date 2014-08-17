@@ -1,9 +1,0 @@
-package kd;
-option java_package = "com.github.kd";
-message KDMessage {
-	required MessageType type = 1;
-	enum MessageType {
-		REQUEST = 0;
-		REPLY = 1;
-	}
-}

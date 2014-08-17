@@ -1,5 +1,5 @@
 kd.network.degree=3
-kd.key.size=160
+kd.key.size=20
 kd.bucket.size=20
 kd.expire.time=86410
 kd.refresh.time=3600
