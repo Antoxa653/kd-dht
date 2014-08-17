@@ -1,4 +1,4 @@
-package com.github.kd.core;
+package com.github.kd.core.domain;
 
 public class Node {
 
