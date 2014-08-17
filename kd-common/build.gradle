@@ -1,0 +1,5 @@
+jar {
+  manifest {
+    attributes 'Implementation-Title': 'Kademlia Common', 'Implementation-Version': version
+  }
+}

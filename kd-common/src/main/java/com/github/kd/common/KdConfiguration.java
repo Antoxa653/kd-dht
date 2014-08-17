@@ -1,4 +1,4 @@
-package com.github.kd;
+package com.github.kd.common;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -51,8 +51,8 @@ public final class KdConfiguration {
 
 	private Properties loadDefault() {
 		Properties properties = new Properties();
-		properties.put(KdConstants.NETWORK_PARALLELISM_DEGREE_PROPERTY, "3");
-		properties.put(KdConstants.KEY_SIZE_PROPERTY, "160");
+		properties.put(KdConstants.NETWORK_DEGREE_PROPERTY, "3");
+		properties.put(KdConstants.KEY_SIZE_PROPERTY, "20"); // 160 bits = 20 bytes
 		properties.put(KdConstants.BUCKET_SIZE_PROPERTY, "20");
 		properties.put(KdConstants.EXPIRATION_TIME_PROPERTY, "86410");
 		properties.put(KdConstants.REFRESH_TIME_PROPERTY, "3600");

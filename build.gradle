@@ -15,17 +15,17 @@ subprojects {
       compile 'ch.qos.logback:logback-classic:1.1.2'
       testCompile 'junit:junit:4.11'
   }
-
-  task recompile {
-    clean
-    compileJava
-    eclipse
-  }
 }
 
 project(':kd-core') {
   dependencies {
-    compile project(':kd-protocol')
+    compile project(':kd-common'), project(':kd-protocol')
+  }
+}
+
+project(':kd-protocol') {
+  dependencies {
+    compile project(':kd-common')
   }
 }
 

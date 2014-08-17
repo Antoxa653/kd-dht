@@ -1,4 +1,4 @@
-package com.github.kd;
+package com.github.kd.common;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -14,7 +14,7 @@ public class KdConfigurationTest {
 		KdConfiguration kdConfig = KdConfiguration.load(configFile);
 
 		Assert.assertNotNull(kdConfig);
-		Assert.assertEquals(7, kdConfig.getValue(KdConstants.NETWORK_PARALLELISM_DEGREE_PROPERTY));
+		Assert.assertEquals(7, kdConfig.getValue(KdConstants.NETWORK_DEGREE_PROPERTY));
 		Assert.assertEquals(120, kdConfig.getValue(KdConstants.KEY_SIZE_PROPERTY));
 		Assert.assertEquals(25, kdConfig.getValue(KdConstants.BUCKET_SIZE_PROPERTY));
 		Assert.assertEquals(86411, kdConfig.getValue(KdConstants.EXPIRATION_TIME_PROPERTY));
@@ -29,8 +29,8 @@ public class KdConfigurationTest {
 		KdConfiguration kdConfig = KdConfiguration.load(configFile);
 
 		Assert.assertNotNull(kdConfig);
-		Assert.assertEquals(3, kdConfig.getValue(KdConstants.NETWORK_PARALLELISM_DEGREE_PROPERTY));
-		Assert.assertEquals(160, kdConfig.getValue(KdConstants.KEY_SIZE_PROPERTY));
+		Assert.assertEquals(3, kdConfig.getValue(KdConstants.NETWORK_DEGREE_PROPERTY));
+		Assert.assertEquals(20, kdConfig.getValue(KdConstants.KEY_SIZE_PROPERTY));
 		Assert.assertEquals(20, kdConfig.getValue(KdConstants.BUCKET_SIZE_PROPERTY));
 		Assert.assertEquals(86410, kdConfig.getValue(KdConstants.EXPIRATION_TIME_PROPERTY));
 		Assert.assertEquals(3600, kdConfig.getValue(KdConstants.REFRESH_TIME_PROPERTY));
