@@ -8,11 +8,9 @@ import org.junit.Test;
 import com.github.kd.protocol.MessageCommand;
 import com.github.kd.protocol.MessageType;
 import com.github.kd.protocol.PingRequestMessage;
-import com.github.kd.protocol.converter.PingRequestMessageConverter;
+import com.github.kd.protocol.converter.ConverterUtils;
 
 public class PingRequestMessageTest {
-
-	private PingRequestMessageConverter converter = new PingRequestMessageConverter();
 
 	private MessageType type = MessageType.REQUEST;
 
@@ -25,7 +23,7 @@ public class PingRequestMessageTest {
 	@Test
 	public void testSerialization() {
 		PingRequestMessage message = new PingRequestMessage(type, command, senderId, randomId);
-		ByteBuffer actualSerializedMessage = converter.serialize(message);
+		ByteBuffer actualSerializedMessage = ConverterUtils.serialize(message);
 		ByteBuffer exceptedSerializedMessage = createSerializedMessage(type, command, senderId, randomId);
 
 		Assert.assertArrayEquals(exceptedSerializedMessage.array(), actualSerializedMessage.array());
@@ -33,7 +31,8 @@ public class PingRequestMessageTest {
 
 	@Test
 	public void testDeserialization() {
-		PingRequestMessage actualMessage = converter.deserialize(createSerializedMessage(type, command, senderId,
+		PingRequestMessage actualMessage = (PingRequestMessage) ConverterUtils.deserialize(createSerializedMessage(
+				type, command, senderId,
 				randomId));
 		PingRequestMessage expectedMessage = new PingRequestMessage(type, command, senderId, randomId);
 
@@ -46,8 +45,8 @@ public class PingRequestMessageTest {
 	@Test
 	public void testSerDeserMessage() {
 		PingRequestMessage initialMessage = new PingRequestMessage(type, command, senderId, randomId);
-		ByteBuffer serializedMessage = converter.serialize(initialMessage);
-		PingRequestMessage deserializedMessage = converter.deserialize(serializedMessage);
+		ByteBuffer serializedMessage = ConverterUtils.serialize(initialMessage);
+		PingRequestMessage deserializedMessage = (PingRequestMessage) ConverterUtils.deserialize(serializedMessage);
 
 		Assert.assertEquals(initialMessage.getType(), deserializedMessage.getType());
 		Assert.assertEquals(initialMessage.getCommand(), deserializedMessage.getCommand());
