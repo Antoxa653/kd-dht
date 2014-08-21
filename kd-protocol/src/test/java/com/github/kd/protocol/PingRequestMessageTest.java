@@ -1,4 +1,4 @@
-package com.github.kd.proto;
+package com.github.kd.protocol;
 
 import java.nio.ByteBuffer;
 

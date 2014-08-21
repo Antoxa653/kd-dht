@@ -13,8 +13,8 @@ public class PingRequestMessageConverter extends MessageConverter {
 	@Override
 	public ByteBuffer serialize(Message message) {
 		ByteBuffer buffer = ByteBuffer.allocate(message.length());
-		ByteBuffer type = super.serialize(message);
-		buffer.put(type);
+		ByteBuffer common = super.serialize(message);
+		buffer.put(common);
 		PingRequestMessage pingMessage = (PingRequestMessage) message;
 		buffer.put(pingMessage.getSenderId());
 		buffer.put(pingMessage.getRandomId());
