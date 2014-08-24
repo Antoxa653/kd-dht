@@ -1,5 +1,7 @@
 package com.github.kd.protocol;
 
+import com.google.common.base.Objects;
+
 public class PingRequestMessage implements Message {
 
 	private MessageType type;
@@ -38,5 +40,13 @@ public class PingRequestMessage implements Message {
 
 	public byte[] getRandomId() {
 		return randomId;
+	}
+
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(this)
+				.add("type", type)
+				.add("command", command)
+				.toString();
 	}
 }
