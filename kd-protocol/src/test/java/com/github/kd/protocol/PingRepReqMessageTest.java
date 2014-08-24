@@ -6,7 +6,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.github.kd.protocol.converter.ConverterUtils;
-import com.github.kd.protocol.converter.PingRepReqMessageConverter;
 
 public class PingRepReqMessageTest {
 
