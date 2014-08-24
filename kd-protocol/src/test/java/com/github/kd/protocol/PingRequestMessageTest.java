@@ -59,7 +59,7 @@ public class PingRequestMessageTest {
 		ByteBuffer buffer = ByteBuffer.allocate(2 + senderId.length + randomId.length);
 		buffer.put(type.id());
 		buffer.put(command.id());
-		buffer.put(senderId);
+		buffer.put(senderId);		
 		buffer.put(randomId);
 		buffer.flip();
 		return buffer;
