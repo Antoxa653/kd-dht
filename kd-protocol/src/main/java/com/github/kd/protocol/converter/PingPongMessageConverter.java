@@ -6,16 +6,16 @@ import com.github.kd.common.KdConstants;
 import com.github.kd.protocol.Message;
 import com.github.kd.protocol.MessageCommand;
 import com.github.kd.protocol.MessageType;
-import com.github.kd.protocol.PingRepReqMessage;
+import com.github.kd.protocol.PingPongMessage;
 
-public class PingRepReqMessageConverter extends MessageConverter {
+public class PingPongMessageConverter extends MessageConverter {
 
 	@Override
 	public ByteBuffer serialize(Message message) {
 		ByteBuffer buffer = ByteBuffer.allocate(message.length());
-		ByteBuffer type = super.serialize(message);
-		buffer.put(type);
-		PingRepReqMessage pingMessage = (PingRepReqMessage) message;
+		ByteBuffer common = super.serialize(message);
+		buffer.put(common);
+		PingPongMessage pingMessage = (PingPongMessage) message;
 		buffer.put(pingMessage.getSenderId());
 		buffer.put(pingMessage.getEchoedRandomId());
 		buffer.put(pingMessage.getRandomId());
@@ -24,7 +24,7 @@ public class PingRepReqMessageConverter extends MessageConverter {
 	}
 
 	@Override
-	public PingRepReqMessage deserialize(ByteBuffer buffer) {
+	public PingPongMessage deserialize(ByteBuffer buffer) {
 		MessageType type = MessageType.valueOf(buffer.get());
 		MessageCommand command = MessageCommand.valueOf(buffer.get());
 		int idSize = getKdProperties().getValue(KdConstants.KEY_SIZE_PROPERTY);
@@ -35,7 +35,7 @@ public class PingRepReqMessageConverter extends MessageConverter {
 		byte[] randomId = new byte[idSize];
 		buffer.get(randomId);
 		buffer.clear();
-		PingRepReqMessage message = new PingRepReqMessage(type, command, senderId, echoedRandomId, randomId);
+		PingPongMessage message = new PingPongMessage(type, command, senderId, echoedRandomId, randomId);
 		return message;
 	}
 }

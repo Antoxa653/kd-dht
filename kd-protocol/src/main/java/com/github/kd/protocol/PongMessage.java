@@ -1,6 +1,10 @@
 package com.github.kd.protocol;
 
-public class PingReplyMessage implements Message {
+import java.util.Arrays;
+
+import com.google.common.base.Objects;
+
+public class PongMessage implements Message {
 
 	private MessageType type;
 
@@ -10,7 +14,7 @@ public class PingReplyMessage implements Message {
 
 	private byte[] echoedRandomId;
 
-	public PingReplyMessage(MessageType type, MessageCommand command, byte[] senderId, byte[] echoedRandomId) {
+	public PongMessage(MessageType type, MessageCommand command, byte[] senderId, byte[] echoedRandomId) {
 		this.type = type;
 		this.command = command;
 		this.senderId = senderId;
@@ -40,4 +44,13 @@ public class PingReplyMessage implements Message {
 		return echoedRandomId;
 	}
 
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(this)
+				.add("type", type)
+				.add("command", command)
+				.add("senderId", Arrays.toString(senderId))
+				.add("echoedRandomId", Arrays.toString(echoedRandomId))
+				.toString();
+	}
 }

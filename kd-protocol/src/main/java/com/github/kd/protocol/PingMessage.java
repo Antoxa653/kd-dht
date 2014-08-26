@@ -1,8 +1,10 @@
 package com.github.kd.protocol;
 
+import java.util.Arrays;
+
 import com.google.common.base.Objects;
 
-public class PingRequestMessage implements Message {
+public class PingMessage implements Message {
 
 	private MessageType type;
 
@@ -12,7 +14,7 @@ public class PingRequestMessage implements Message {
 
 	private byte[] randomId;
 
-	public PingRequestMessage(MessageType type, MessageCommand command, byte[] senderId, byte[] randomId) {
+	public PingMessage(MessageType type, MessageCommand command, byte[] senderId, byte[] randomId) {
 		this.type = type;
 		this.command = command;
 		this.senderId = senderId;
@@ -47,6 +49,8 @@ public class PingRequestMessage implements Message {
 		return Objects.toStringHelper(this)
 				.add("type", type)
 				.add("command", command)
+				.add("senderId", Arrays.toString(senderId))
+				.add("randomId", Arrays.toString(randomId))
 				.toString();
 	}
 }
