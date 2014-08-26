@@ -2,6 +2,7 @@ package com.github.kd.protocol.converter;
 
 import java.nio.ByteBuffer;
 
+import com.github.kd.common.KdConfiguration;
 import com.github.kd.common.KdConstants;
 import com.github.kd.protocol.Message;
 import com.github.kd.protocol.MessageCommand;
@@ -15,10 +16,10 @@ public class PingPongMessageConverter extends MessageConverter {
 		ByteBuffer buffer = ByteBuffer.allocate(message.length());
 		ByteBuffer common = super.serialize(message);
 		buffer.put(common);
-		PingPongMessage pingMessage = (PingPongMessage) message;
-		buffer.put(pingMessage.getSenderId());
-		buffer.put(pingMessage.getEchoedRandomId());
-		buffer.put(pingMessage.getRandomId());
+		PingPongMessage pingPongMessage = (PingPongMessage) message;
+		buffer.put(pingPongMessage.getSenderId());
+		buffer.put(pingPongMessage.getEchoedRandomId());
+		buffer.put(pingPongMessage.getRandomId());
 		buffer.flip();
 		return buffer;
 	}
@@ -27,7 +28,7 @@ public class PingPongMessageConverter extends MessageConverter {
 	public PingPongMessage deserialize(ByteBuffer buffer) {
 		MessageType type = MessageType.valueOf(buffer.get());
 		MessageCommand command = MessageCommand.valueOf(buffer.get());
-		int idSize = getKdProperties().getValue(KdConstants.KEY_SIZE_PROPERTY);
+		int idSize = KdConfiguration.get(KdConstants.KEY_SIZE_PROPERTY);
 		byte[] senderId = new byte[idSize];
 		buffer.get(senderId);
 		byte[] echoedRandomId = new byte[idSize];
