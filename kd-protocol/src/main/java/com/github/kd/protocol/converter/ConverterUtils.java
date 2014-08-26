@@ -15,6 +15,9 @@ public final class ConverterUtils {
 
 	static {
 		MESSAGE_CONVERTERS.put(MessageCommand.PING, new PingRequestMessageConverter());
+		MESSAGE_CONVERTERS.put(MessageCommand.PING_PONG, new PingReplyMessageConverter());
+		MESSAGE_CONVERTERS.put(MessageCommand.PING_PONG_PING, new PingRepReqMessageConverter());
+
 	}
 
 	private ConverterUtils() {
