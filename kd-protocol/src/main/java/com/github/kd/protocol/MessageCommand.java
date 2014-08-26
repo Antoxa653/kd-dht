@@ -3,7 +3,8 @@ package com.github.kd.protocol;
 public enum MessageCommand {
 
 	PING((byte) 1),
-	PING_PONG((byte) 2);
+	FIND_NODE_REQUEST((byte) 2),
+	FIND_NODE_REPLY((byte) 3);
 
 	private byte id;
 
@@ -20,7 +21,9 @@ public enum MessageCommand {
 		case 1:
 			return PING;
 		case 2:
-			return PING_PONG;
+			return FIND_NODE_REQUEST;
+		case 3:
+			return FIND_NODE_REPLY;
 		default:
 			throw new IllegalArgumentException("No message command with such an id: " + id);
 		}
