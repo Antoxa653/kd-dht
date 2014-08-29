@@ -47,10 +47,10 @@ public class FindValueReplyMessageConverter extends MessageConverter {
 		byte[] key = new byte[idSize];
 		buffer.get(key);
 
-		int contactsNumber = buffer.getInt();
+		int valuesNumber = buffer.getInt();
 		List<Value> values = new ArrayList<>();
 
-		for (int i = 0; i < contactsNumber; i++) {
+		for (int i = 0; i < valuesNumber; i++) {
 			byte[] ip = new byte[4]; // IP address takes 4 bytes
 			buffer.get(ip);
 			short port = buffer.getShort();
