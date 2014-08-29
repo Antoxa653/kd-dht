@@ -30,9 +30,11 @@ public final class ConverterUtils {
 		REQUEST_MESSAGE_CONVERTERS.put(MessageCommand.PING, new PingMessageConverter());
 		REQUEST_MESSAGE_CONVERTERS.put(MessageCommand.PING_PONG, new PingPongMessageConverter());
 		REQUEST_MESSAGE_CONVERTERS.put(MessageCommand.FIND_NODE, new FindNodeRequestMessageConverter());
+		REQUEST_MESSAGE_CONVERTERS.put(MessageCommand.FIND_VALUE, new FindValueRequestMessageConverter());
 
 		REPLY_MESSAGE_CONVERTERS.put(MessageCommand.PONG, new PongMessageConverter());
 		REPLY_MESSAGE_CONVERTERS.put(MessageCommand.FIND_NODE, new FindNodeReplyMessageConverter());
+		REPLY_MESSAGE_CONVERTERS.put(MessageCommand.FIND_VALUE, new FindValueReplyMessageConverter());
 	}
 
 	private ConverterUtils() {

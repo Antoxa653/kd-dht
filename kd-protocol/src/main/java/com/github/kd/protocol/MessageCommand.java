@@ -5,7 +5,8 @@ public enum MessageCommand {
 	PING((byte) 1),
 	PING_PONG((byte) 2),
 	PONG((byte) 3),
-	FIND_NODE((byte) 4);
+	FIND_NODE((byte) 4),
+	FIND_VALUE((byte) 5);
 
 	private byte id;
 
@@ -27,6 +28,8 @@ public enum MessageCommand {
 			return PONG;
 		case 4:
 			return FIND_NODE;
+		case 5:
+			return FIND_VALUE;
 		default:
 			throw new IllegalArgumentException("No message command with such an id: " + id);
 		}
